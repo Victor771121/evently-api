@@ -11,7 +11,6 @@ export default class AuthService {
         return await User.create(userData);
     }
 
-
     static async findUserById(id) {
         return await User.findByPk(id);
     }
@@ -39,3 +38,6 @@ export default class AuthService {
 
     
 }
+
+const cors = require('cors');
+app.use(cors());

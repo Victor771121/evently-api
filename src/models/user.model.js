@@ -1,11 +1,11 @@
 // src/models/user.model.js
 
-import { DataTypes, Model } from 'sequelize';
+import { Model } from 'sequelize';
 import bcrypt from 'bcryptjs';
 
 // 1. Create a function that accepts 'sequelize' and 'DataTypes'
 export default (sequelizeInstance, DataTypes) => {
-    
+
     // 2. Define the User class inside the function
     class User extends Model {
         // You can define instance methods here, e.g., to compare passwords

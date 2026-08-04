@@ -3,6 +3,9 @@
 import { Sequelize } from 'sequelize';
 import config from '../config/config.json' with { type: 'json' };
 import userModel from './user.model.js'; // Import the model FUNCTION
+import eventModel from './event.model.js'; // Import the model FUNCTION
+import ticketModel from './ticket.model.js'; // Import the model FUNCTION
+import cartModel from './cart.model.js';
 
 // 1. Determine which environment to use
 const env = process.env.NODE_ENV || 'development';
@@ -22,11 +25,16 @@ if (dbConfig.use_env_variable) {
 // 3. Initialize the models
 // Call the function from user.model.js, passing the instance and DataTypes
 db.User = userModel(sequelize, Sequelize.DataTypes);
+db.Event = eventModel(sequelize, Sequelize.DataTypes);
+db.Ticket = ticketModel(sequelize, Sequelize.DataTypes);
+db.Cart = cartModel(sequelize, Sequelize.DataTypes);
 
-// 4. Set up associations (optional, but standard practice)
-// if (db.User.associate) {
-//     db.User.associate(db);
-// }
+// 4. Set up associations
+Object.values(db).forEach((model) => {
+  if (model && typeof model.associate === 'function') {
+    model.associate(db);
+  }
+});
 
 db.sequelize = sequelize; // Export the instance itself
 db.Sequelize = Sequelize; // Export the Sequelize library

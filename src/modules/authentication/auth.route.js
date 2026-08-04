@@ -12,3 +12,4 @@ router.patch('/user/:id', AuthController.updateUser)
 
 // Correct export for an Express Router instance
 export default router;
+
