@@ -1,6 +1,7 @@
 import dotenv from 'dotenv';
 import express from 'express';
 import cookieParser from 'cookie-parser';
+import authRouter from './src/modules/authentication/auth.route.js'
 
 dotenv.config();
 
@@ -13,6 +14,7 @@ export const createServer = () => {
   app.get('/', (req, res) => {
     res.json({ message: 'Hello World' });
   });
+  app.use('/api/v1/auth', authRouter)
 
 //   app.use('/api/v1/replay', router);
 //   app.use(globalErrorHandler);

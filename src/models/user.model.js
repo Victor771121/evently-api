@@ -48,20 +48,20 @@ export default (sequelizeInstance, DataTypes) => {
         sequelize: sequelizeInstance, // Use the instance passed into the function
         tableName: 'users',
         timestamps: true,
-        hooks: {
-            beforeCreate: async (user) => {
-                if (user.password) {
-                    const salt = await bcrypt.genSalt(10);
-                    user.password = await bcrypt.hash(user.password, salt);
-                }
-            },
-            beforeUpdate: async (user) => {
-                if (user.changed('password')) {
-                    const salt = await bcrypt.genSalt(10);
-                    user.password = await bcrypt.hash(user.password, salt);
-                }
-            },
-        },
+        // hooks: {
+        //     beforeCreate: async (user) => {
+        //         if (user.password) {
+        //             const salt = await bcrypt.genSalt(10);
+        //             user.password = await bcrypt.hash(user.password, salt);
+        //         }
+        //     },
+        //     beforeUpdate: async (user) => {
+        //         if (user.changed('password')) {
+        //             const salt = await bcrypt.genSalt(10);
+        //             user.password = await bcrypt.hash(user.password, salt);
+        //         }
+        //     },
+        // },
     });
 
     return User;
